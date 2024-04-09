@@ -1,0 +1,34 @@
+{
+  "name": "er-builds-web",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "vite build -w false",
+    "watch": "vite build -w true",
+    "storybook": "storybook dev -p 6006 --no-open"
+  },
+  "dependencies": {
+    "@types/react": "^18.2.75",
+    "@types/react-dom": "^18.2.24",
+    "@vitejs/plugin-react": "^4.2.1",
+    "less": "^4.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^4.14.1",
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8",
+    "vite-plugin-checker": "^0.6.4",
+    "vite-tsconfig-paths": "^4.3.2"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "1.3.1",
+    "@storybook/addon-essentials": "^8.0.6",
+    "@storybook/addon-interactions": "^8.0.6",
+    "@storybook/addon-links": "^8.0.6",
+    "@storybook/addon-onboarding": "^8.0.6",
+    "@storybook/blocks": "^8.0.6",
+    "@storybook/react": "^8.0.6",
+    "@storybook/react-vite": "^8.0.6",
+    "@storybook/test": "^8.0.6",
+    "storybook": "^8.0.6"
+  }
+}
