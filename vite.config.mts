@@ -39,15 +39,15 @@ export default defineConfig({
                 // "chart-test":`${__dirname}/web/html/index.html`,
             },
 
-            onLog(level:LogLevel,log:RollupLog,handler:LogHandler):void
-            {
-                if (log.message.includes("Error when using sourcemap for reporting"))
-                {
-                    return;
-                }
+            // onLog(level:LogLevel,log:RollupLog,handler:LogHandler):void
+            // {
+            //     if (log.message.includes("Error when using sourcemap for reporting"))
+            //     {
+            //         return;
+            //     }
 
-                handler(level,log);
-            }
+            //     handler(level,log);
+            // }
         }
     }
 });
