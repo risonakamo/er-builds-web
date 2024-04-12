@@ -23,7 +23,8 @@ const meta:Meta<typeof ItemRow>={
       totalWinRate: 203.91000366210938,
       averageWinRate: 4.742093086242676,
       highestWinRate: 66.66999816894531
-    }
+    },
+    sortStat:"builds"
   }
 };
 export default meta;

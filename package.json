@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.12",
+    "@types/lodash": "^4.17.0",
     "@types/react": "^18.2.75",
     "@types/react-dom": "^18.2.24",
     "@vitejs/plugin-react": "^4.2.1",
     "less": "^4.2.0",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^4.14.1",

@@ -9,7 +9,7 @@ type ItemType =
     | "leg"
 
 /** possible fields ItemStats can be sorted by */
-type ItemStatsSortFields =
+type ItemStatsSortField =
     | "builds"
     | "buildPercentage"
     | "likes"
@@ -43,4 +43,12 @@ interface ItemsStatistics
     totalWinRate: number
     averageWinRate: number
     highestWinRate: number
+}
+
+/** extracted sortable field */
+interface ItemStatsSortableValue
+{
+    fieldDisplayName: string
+    field: ItemStatsSortField
+    value: number
 }
