@@ -11,6 +11,30 @@ export const allItemStatSortFields:ItemStatsSortField[]=[
     "highestWinRate",
 ];
 
+/** all the sortable fields as option containers */
+export const allItemStatSortOptions: ItemStatsSortOption[]=[
+    {
+        field: "builds",
+        displayName: "Builds"
+    },
+    {
+        field: "buildPercentage",
+        displayName: "Build Percentage"
+    },
+    {
+        field: "likes",
+        displayName: "Likes"
+    },
+    {
+        field: "avgWinRate",
+        displayName: "Average Win Rate"
+    },
+    {
+        field: "highestWinRate",
+        displayName: "Highest Win Rate"
+    }
+];
+
 /** given an item statistics and a selected field to sort on, return that particular
  *  field with a displayname for the field */
 export function getSortableField(

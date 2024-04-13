@@ -52,3 +52,10 @@ interface ItemStatsSortableValue
     field: ItemStatsSortField
     value: number|string
 }
+
+/** a sort field and its display name for use in select dropdowns */
+interface ItemStatsSortOption
+{
+    field: ItemStatsSortField
+    displayName: string
+}

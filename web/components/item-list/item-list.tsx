@@ -1,6 +1,9 @@
+import {useState} from "react";
 import _ from "lodash";
 
 import {ItemRow} from "components/item-row/item-row";
+
+import {allItemStatSortOptions} from "lib/er-data-lib";
 
 import "./item-list.less";
 
@@ -11,11 +14,29 @@ interface ItemListProps
 
 export function ItemList(props:ItemListProps):JSX.Element
 {
+  const [sortField,setSortField]=useState<ItemStatsSortField>("builds");
+
+  /** sort select was changed. set the new sort field */
+  function h_sortSelectChange(e:React.ChangeEvent<HTMLSelectElement>):void
+  {
+    setSortField(e.target.value as ItemStatsSortField);
+  }
+
   /** render list of item rows */
   function r_itemslist():JSX.Element[]
   {
     return _.map(props.itemStats,(itemstat:ItemsStatistics):JSX.Element=>{
-      return <ItemRow itemStats={itemstat} sortStat="builds" key={itemstat.itemInfo.id}/>;
+      return <ItemRow itemStats={itemstat} sortStat={sortField} key={itemstat.itemInfo.id}/>;
+    });
+  }
+
+  /** render the options of the sort selector */
+  function r_sortOptions():JSX.Element[]
+  {
+    return _.map(allItemStatSortOptions,(sortOption:ItemStatsSortOption):JSX.Element=>{
+      return <option key={sortOption.field} value={sortOption.field}>
+        {sortOption.displayName}
+      </option>;
     });
   }
 
@@ -25,10 +46,8 @@ export function ItemList(props:ItemListProps):JSX.Element
 
       </div>
       <div className="sort-zone">
-        <select>
-          <option>Builds</option>
-          <option>Build Percent</option>
-          <option>Likes</option>
+        <select value={sortField} onChange={h_sortSelectChange}>
+          {r_sortOptions()}
         </select>
       </div>
     </div>
