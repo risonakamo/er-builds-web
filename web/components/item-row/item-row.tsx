@@ -2,9 +2,7 @@ import {useState} from "react";
 import {autoPlacement,useFloating,useHover,useInteractions} from "@floating-ui/react";
 import _ from "lodash";
 
-import {allItemStatSortFields, getSortableField} from "lib/er-data-lib";
-
-import testbat from "assets/test-bat.webp";
+import {allItemStatSortFields, getSortableField, resolveDakUrl} from "lib/er-data-lib";
 
 import "./item-row.less";
 
@@ -55,12 +53,17 @@ export function ItemRow(props:ItemRowProps):JSX.Element
     });
   }
 
+  const itemContainStyles:React.CSSProperties={
+    background:`url("${resolveDakUrl(props.itemStats.itemInfo.backgroundImageUrl)}")`
+  };
 
   return <>
     <div className="item-row">
       <div className="img">
-        <div className="item-contain" ref={refs.setReference} {...getReferenceProps}>
-          <img src={testbat}/>
+        <div className="item-contain" ref={refs.setReference} {...getReferenceProps}
+          style={itemContainStyles}
+        >
+          <img src={resolveDakUrl(props.itemStats.itemInfo.imageUrl)}/>
         </div>
       </div>
 

@@ -83,3 +83,9 @@ export function getSortableField(
         value:-1
     };
 }
+
+/** convert incomplete dak asset url into full url */
+export function resolveDakUrl(url:string):string
+{
+    return `https://cdn.dak.gg${url}`;
+}
