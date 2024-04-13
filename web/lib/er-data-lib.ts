@@ -1,5 +1,7 @@
 // functions working with er data types
 
+import _ from "lodash";
+
 /** all the sortable fields */
 export const allItemStatSortFields:ItemStatsSortField[]=[
     "builds",
@@ -29,7 +31,7 @@ export function getSortableField(
         return {
             field:sortField,
             fieldDisplayName:"Builds Percent",
-            value:itemStats.buildsPercentage
+            value:`${_.round(itemStats.buildsPercentage,2)}%`
         };
         case "likes":
         return {
@@ -41,13 +43,13 @@ export function getSortableField(
         return {
             field:sortField,
             fieldDisplayName:"Avg WR",
-            value:itemStats.averageWinRate
+            value:`${_.round(itemStats.averageWinRate,2)}%`
         };
         case "highestWinRate":
         return {
             field:sortField,
             fieldDisplayName:"Highest WR",
-            value:itemStats.highestWinRate
+            value:`${_.round(itemStats.highestWinRate,2)}%`
         };
     }
 

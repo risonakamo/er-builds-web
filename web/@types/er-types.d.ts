@@ -50,5 +50,5 @@ interface ItemStatsSortableValue
 {
     fieldDisplayName: string
     field: ItemStatsSortField
-    value: number
+    value: number|string
 }
