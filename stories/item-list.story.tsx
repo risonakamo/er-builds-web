@@ -1,7 +1,7 @@
 import type {Meta,StoryObj} from "@storybook/react";
 
 import {ItemList} from "components/item-list/item-list";
-import {itemStatsExample1} from "lib/sample-data";
+import {itemStatsExample1, itemStatsExample2} from "lib/sample-data";
 
 type Story=StoryObj<typeof ItemList>;
 
@@ -16,4 +16,10 @@ export default meta;
 
 export const normal:Story={
 
+};
+
+export const list2:Story={
+  args:{
+    itemStats:itemStatsExample2
+  }
 };
