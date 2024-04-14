@@ -3,7 +3,7 @@ import _ from "lodash";
 
 import {ItemRow} from "components/item-row/item-row";
 
-import {allItemStatSortOptions} from "lib/er-data-lib";
+import {allItemStatSortOptions,getSortableField} from "lib/er-data-lib";
 
 import HeadItemImg from "assets/head-item.webp";
 import "./item-list.less";
@@ -26,9 +26,15 @@ export function ItemList(props:ItemListProps):JSX.Element
   /** render list of item rows */
   function r_itemslist():JSX.Element[]
   {
-    return _.map(props.itemStats,(itemstat:ItemsStatistics):JSX.Element=>{
-      return <ItemRow itemStats={itemstat} sortStat={sortField} key={itemstat.itemInfo.id}/>;
-    });
+    return _(props.itemStats)
+      .sortBy((itemstat:ItemsStatistics):number|string=>{
+        return getSortableField(itemstat,sortField).value;
+      })
+      .reverse()
+      .map((itemstat:ItemsStatistics):JSX.Element=>{
+        return <ItemRow itemStats={itemstat} sortStat={sortField} key={itemstat.itemInfo.id}/>;
+      })
+      .value();
   }
 
   /** render the options of the sort selector */
