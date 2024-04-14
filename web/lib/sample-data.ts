@@ -12,7 +12,7 @@ export const itemStatsExample1:ItemsStatistics[]=[
         },
         totalBuilds: 43,
         buildsPercentage: 0,
-        likes: 0,
+        likes: 32,
         totalWinRate: 203.91000366210938,
         averageWinRate: 4.742093086242676,
         highestWinRate: 66.66999816894531
@@ -28,7 +28,7 @@ export const itemStatsExample1:ItemsStatistics[]=[
         },
         totalBuilds: 40,
         buildsPercentage: 0,
-        likes: 0,
+        likes: 21,
         totalWinRate: 225.4199981689453,
         averageWinRate: 5.635499954223633,
         highestWinRate: 55.560001373291016
