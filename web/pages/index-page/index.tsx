@@ -1,5 +1,7 @@
 import {createRoot} from "react-dom/client";
-import {useEffect} from "react";
+import {useQuery,QueryClient,QueryClientProvider} from "@tanstack/react-query";
+
+import {ItemList} from "components/item-list/item-list";
 
 import {getBuilds} from "apis/er-builds-api";
 
@@ -7,20 +9,41 @@ import "./index.less";
 
 function IndexPage():JSX.Element
 {
-  useEffect(()=>{
-    (async ()=>{
-      console.log(await getBuilds("Tia","Bat"));
-    })();
+  const buildsDataQy=useQuery<GroupedItemStatistics>({
+    queryKey:["Tia","Bat"],
+
+    initialData:{
+      weapon:[],
+      head:[],
+      chest:[],
+      arm:[],
+      leg:[],
+    },
+
+    async queryFn():Promise<GroupedItemStatistics>
+    {
+      const data=await getBuilds("Tia","Bat");
+      console.log(data);
+      return data;
+    }
   });
 
   return <>
-    hello
+    <ItemList itemStats={buildsDataQy.data.weapon}/>
+    <ItemList itemStats={buildsDataQy.data.head}/>
+    <ItemList itemStats={buildsDataQy.data.chest}/>
+    <ItemList itemStats={buildsDataQy.data.arm}/>
+    <ItemList itemStats={buildsDataQy.data.leg}/>
   </>;
 }
 
 function main()
 {
-  createRoot(document.querySelector("main")!).render(<IndexPage/>);
+  createRoot(document.querySelector("main")!).render(
+    <QueryClientProvider client={new QueryClient()}>
+      <IndexPage/>
+    </QueryClientProvider>
+  );
 }
 
 window.onload=main;
