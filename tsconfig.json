@@ -20,6 +20,7 @@
         "isolatedModules":true,
         "allowSyntheticDefaultImports": true,
         // "skipLibCheck":true,
+        // "preserveSymlinks": true,
 
         // -- pathing
         "baseUrl":".",

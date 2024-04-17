@@ -12,6 +12,7 @@
     "@types/react": "^18.2.75",
     "@types/react-dom": "^18.2.24",
     "@vitejs/plugin-react": "^4.2.1",
+    "axios": "^1.6.8",
     "less": "^4.2.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",

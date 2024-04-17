@@ -16,6 +16,11 @@ type ItemStatsSortField =
     | "avgWinRate"
     | "highestWinRate"
 
+/** list of item statistics grouped by their type
+    key: the item type
+    val: all item statistics objs that have this type */
+type GroupedItemStatistics=Record<ItemType,ItemsStatistics[]>
+
 /** info of a single item */
 interface ItemInfo2
 {
