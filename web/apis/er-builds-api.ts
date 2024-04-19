@@ -14,3 +14,9 @@ export async function getBuilds(character:string,weapon:string):Promise<GroupedI
         }
     })).data;
 }
+
+/** call api to get available data files */
+export async function getDatafiles():Promise<ErDataFileDescriptor[]>
+{
+    return (await ax.get("/get-datafiles")).data;
+}

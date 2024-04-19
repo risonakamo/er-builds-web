@@ -64,3 +64,12 @@ interface ItemStatsSortOption
     field: ItemStatsSortField
     displayName: string
 }
+
+/** information about an er data file */
+interface ErDataFileDescriptor
+{
+    character:string
+    weapon:string
+
+    filename:string
+}

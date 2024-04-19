@@ -3,7 +3,7 @@ import {useQuery,QueryClient,QueryClientProvider} from "@tanstack/react-query";
 
 import {ItemList} from "components/item-list/item-list";
 
-import {getBuilds} from "apis/er-builds-api";
+import {getBuilds,getDatafiles} from "apis/er-builds-api";
 
 import "./index.less";
 
@@ -24,6 +24,18 @@ function IndexPage():JSX.Element
     {
       const data=await getBuilds("Tia","Bat");
       console.log(data);
+      return data;
+    }
+  });
+
+  const datafilesQy=useQuery<ErDataFileDescriptor[]>({
+    queryKey:["datafiles"],
+    initialData:[],
+
+    async queryFn():Promise<ErDataFileDescriptor[]>
+    {
+      const data=await getDatafiles();
+      console.log("datafiles",data);
       return data;
     }
   });
