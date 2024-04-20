@@ -22,7 +22,7 @@ function IndexPage():JSX.Element
 
     async queryFn():Promise<GroupedItemStatistics>
     {
-      const data=await getBuilds("Tia","Bat");
+      const data=await getBuilds("DebiMarlene","TwoHandSword");
       console.log(data);
       return data;
     }
@@ -41,11 +41,23 @@ function IndexPage():JSX.Element
   });
 
   return <>
-    <ItemList itemStats={buildsDataQy.data.weapon}/>
-    <ItemList itemStats={buildsDataQy.data.head}/>
-    <ItemList itemStats={buildsDataQy.data.chest}/>
-    <ItemList itemStats={buildsDataQy.data.arm}/>
-    <ItemList itemStats={buildsDataQy.data.leg}/>
+    <div className="top-header">
+      <div className="select-entry">
+        <p>Character</p>
+        <select>
+          <option>Tia</option>
+          <option>Debi</option>
+          <option>Abigail</option>
+        </select>
+      </div>
+    </div>
+    <div className="item-lists">
+      <ItemList itemStats={buildsDataQy.data.weapon}/>
+      <ItemList itemStats={buildsDataQy.data.head}/>
+      <ItemList itemStats={buildsDataQy.data.chest}/>
+      <ItemList itemStats={buildsDataQy.data.arm}/>
+      <ItemList itemStats={buildsDataQy.data.leg}/>
+    </div>
   </>;
 }
 
