@@ -25,7 +25,10 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
 
   return <>
     <div className="dropdown1" ref={refs.setReference} {...getReferenceProps()}>
-      huh
+      <div className="select-item-contain">
+        <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_DebiMarlene_S000.png"/>
+        <span>DebiMarlene</span>
+      </div>
     </div>
 
     {open &&
@@ -34,13 +37,17 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
           {...getFloatingProps()}
         >
           <div className="select-item">
-            <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_DebiMarlene_S000.png"/>
-            <span>DebiMarlene</span>
+            <div className="select-item-contain">
+              <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_DebiMarlene_S000.png"/>
+              <span>DebiMarlene</span>
+            </div>
           </div>
 
           <div className="select-item">
-            <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_Tia_S000.png"/>
-            <span>Tia</span>
+            <div className="select-item-contain">
+              <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_Tia_S000.png"/>
+              <span>Tia</span>
+            </div>
           </div>
         </div>
       </FloatingPortal>

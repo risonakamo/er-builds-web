@@ -2,14 +2,26 @@
     display: inline-block;
     border: 1px solid #746262;
     border-radius: 4px;
-    padding: 12px;
-    width: 130px;
+    padding: 6px 20px;
     font-family: "arial";
     user-select: none;
     cursor: pointer;
 
     &:hover {
         background: #ededed;
+    }
+}
+
+.select-item-contain {
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 35px;
+    }
+
+    span {
+        margin-left: 16px;
     }
 }
 
@@ -27,14 +39,6 @@
         display: flex;
         align-items: center;
 
-        img {
-            width: 35px;
-        }
-
-        span {
-            margin-left: 16px;
-        }
-
         &:hover {
             background: #e1e1e1;
         }
@@ -43,5 +47,4 @@
             background: #dadada;
         }
     }
-
 }
