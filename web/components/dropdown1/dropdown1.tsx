@@ -1,6 +1,8 @@
-import {FloatingOverlay, FloatingPortal, useClick, useDismiss, useFloating, useInteractions} from "@floating-ui/react";
-import "./dropdown1.less";
 import {useState} from "react";
+import {FloatingOverlay, FloatingPortal, useClick, useDismiss, useFloating,
+  useInteractions} from "@floating-ui/react";
+
+import "./dropdown1.less";
 
 interface Dropdown1Props
 {
@@ -32,10 +34,13 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
           {...getFloatingProps()}
         >
           <div className="select-item">
-            hello
+            <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_DebiMarlene_S000.png"/>
+            <span>DebiMarlene</span>
           </div>
+
           <div className="select-item">
-            hello2
+            <img src="https://cdn.dak.gg/assets/er/game-assets/1.19.0/CharCommunity_Tia_S000.png"/>
+            <span>Tia</span>
           </div>
         </div>
       </FloatingPortal>
