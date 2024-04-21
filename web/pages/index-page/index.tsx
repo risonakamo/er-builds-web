@@ -2,6 +2,7 @@ import {createRoot} from "react-dom/client";
 import {useQuery,QueryClient,QueryClientProvider} from "@tanstack/react-query";
 
 import {ItemList} from "components/item-list/item-list";
+import {BuildSelector} from "components/build-selector/build-selector";
 
 import {getBuilds,getDatafiles} from "apis/er-builds-api";
 
@@ -42,14 +43,7 @@ function IndexPage():JSX.Element
 
   return <>
     <div className="top-header">
-      <div className="select-entry">
-        <p>Character</p>
-        <select>
-          <option>Tia</option>
-          <option>Debi</option>
-          <option>Abigail</option>
-        </select>
-      </div>
+      <BuildSelector datafiles={datafilesQy.data}/>
     </div>
     <div className="item-lists">
       <ItemList itemStats={buildsDataQy.data.weapon}/>

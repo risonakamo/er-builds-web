@@ -2,7 +2,8 @@ import {useState} from "react";
 import {autoPlacement,useFloating,useHover,useInteractions} from "@floating-ui/react";
 import _ from "lodash";
 
-import {allItemStatSortFields, getSortableField, resolveDakUrl} from "lib/er-data-lib";
+import {allItemStatSortFields, getSortableField} from "lib/er-data-lib";
+import { resolveDakUrl } from "lib/dak-lib";
 
 import "./item-row.less";
 

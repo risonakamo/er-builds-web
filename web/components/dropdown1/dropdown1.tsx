@@ -6,20 +6,22 @@ import _ from "lodash";
 
 import "./dropdown1.less";
 
+interface Dropdown1Props
+{
+  options:DropdownItem[]
+  currentSelection:string|null
+
+  onSelectionChange?(newSelection:string):void
+
+  placeholder:string
+}
+
 export interface DropdownItem
 {
   value:string
 
   img?:string
   displayText?:string
-}
-
-interface Dropdown1Props
-{
-  options:DropdownItem[]
-  currentSelection:string|null
-
-  onSelectionChange(newSelection:string):void
 }
 
 export function Dropdown1(props:Dropdown1Props):JSX.Element
@@ -58,7 +60,7 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
       /** clicked on select item. set the current selection to the item. close the dropdown */
       function h_selectItemClick():void
       {
-        props.onSelectionChange(selectItem.value);
+        props.onSelectionChange?.(selectItem.value);
         setOpen(false);
       }
 
@@ -79,7 +81,7 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
     if (!currentSelectionObj)
     {
       return <>
-        <span>Character</span>
+        <span>{props.placeholder}</span>
         <ChevronDownIcon className="down-icon"/>
       </>;
     }

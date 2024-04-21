@@ -16,6 +16,12 @@ type ItemStatsSortField =
     | "avgWinRate"
     | "highestWinRate"
 
+/** dak gg character name enums */
+type CharacterName =
+    | "DebiMarlene"
+    | "Abigail"
+    | "Tia"
+
 /** list of item statistics grouped by their type
     key: the item type
     val: all item statistics objs that have this type */
