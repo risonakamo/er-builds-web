@@ -35,10 +35,10 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
 
 
   // --- float ui ---
-  const {refs,floatingStyles,context}=useFloating({
+  const {refs,floatingStyles,context,elements}=useFloating<HTMLDivElement>({
     open,
     onOpenChange:setOpen,
-    placement:"bottom-start"
+    placement:"bottom-start",
   });
 
   const floatClick=useClick(context);
@@ -92,6 +92,14 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
   }
 
 
+  // --- prerender ---
+  const floatboxStyle:React.CSSProperties={
+    ...floatingStyles,
+    minWidth:`${elements.reference?.getBoundingClientRect().width}px` || "100px"
+  }
+
+
+
 
   // --- render ---
   return <>
@@ -103,7 +111,7 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
 
     {open &&
       <FloatingPortal>
-        <div className="dropdown1-float-box" ref={refs.setFloating} style={floatingStyles}
+        <div className="dropdown1-float-box" ref={refs.setFloating} style={floatboxStyle}
           {...getFloatingProps()}
         >
           {r_selectItems()}
