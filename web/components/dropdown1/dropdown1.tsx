@@ -17,21 +17,23 @@ export interface DropdownItem
 interface Dropdown1Props
 {
   options:DropdownItem[]
+  currentSelection:string|null
+
+  onSelectionChange(newSelection:string):void
 }
 
 export function Dropdown1(props:Dropdown1Props):JSX.Element
 {
   // --- states ---
   const [open,setOpen]=useState<boolean>(false);
-  const [currentSelection,setCurrentSelection]=useState<string|null>(null);
 
 
   // --- derived ---
   const currentSelectionObj:DropdownItem|undefined=useMemo(()=>{
     return _.find(props.options,(option:DropdownItem):boolean=>{
-      return option.value==currentSelection;
+      return option.value==props.currentSelection;
     });
-  },[currentSelection]);
+  },[props.currentSelection]);
 
 
   // --- float ui ---
@@ -56,7 +58,7 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
       /** clicked on select item. set the current selection to the item. close the dropdown */
       function h_selectItemClick():void
       {
-        setCurrentSelection(selectItem.value);
+        props.onSelectionChange(selectItem.value);
         setOpen(false);
       }
 
