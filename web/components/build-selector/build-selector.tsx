@@ -76,6 +76,8 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
 
 
   // --- render
+  const weaponDropdownDisabled:boolean=!weaponOptions.length;
+
   return <div className="build-selector">
     <div className="contain">
       <div className="select-row">
@@ -90,7 +92,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
         <span className="row-title">Weapon</span>
         <span>
           <Dropdown1 options={weaponOptions} currentSelection={selectedWeapon} placeholder="Weapon"
-            onSelectionChange={h_selectedWeapon}/>
+            onSelectionChange={h_selectedWeapon} disabled={weaponDropdownDisabled}/>
         </span>
       </div>
     </div>

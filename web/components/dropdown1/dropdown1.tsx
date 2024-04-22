@@ -3,6 +3,7 @@ import {FloatingOverlay, FloatingPortal, useClick, useDismiss, useFloating,
   useInteractions} from "@floating-ui/react";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
 import _ from "lodash";
+import {clsx} from "clsx";
 
 import "./dropdown1.less";
 
@@ -14,6 +15,7 @@ interface Dropdown1Props
   onSelectionChange?(newSelection:string):void
 
   placeholder:string
+  disabled?:boolean
 }
 
 export interface DropdownItem
@@ -102,12 +104,16 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
     minWidth:`${elements.reference?.getBoundingClientRect().width}px` || "100px"
   }
 
+  const topCx:string=clsx("dropdown1",{
+    disabled:props.disabled
+  });
+
 
 
 
   // --- render ---
   return <>
-    <div className="dropdown1" ref={refs.setReference} {...getReferenceProps()}>
+    <div className={topCx} ref={refs.setReference} {...getReferenceProps()}>
       <div className="select-item-contain">
         {r_currentSelection()}
       </div>
