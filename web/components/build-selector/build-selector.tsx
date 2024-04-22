@@ -1,7 +1,9 @@
 import {useMemo, useState} from "react";
 import _ from "lodash";
+import {useAtom} from "jotai";
 
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
+import { selectedCharacterAtm,selectedWeaponAtm } from "web/pages/index-page";
 
 import {resolveCharacterImg} from "lib/dak-lib";
 
@@ -16,8 +18,8 @@ interface BuildSelectorProps
 export function BuildSelector(props:BuildSelectorProps):JSX.Element
 {
   // --- states
-  const [selectedCharacter,setSelectedCharacter]=useState<string|null>(null);
-  const [selectedWeapon,setSelectedWeapon]=useState<string|null>(null);
+  const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
+  const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
 
 
 
