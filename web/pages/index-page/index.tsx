@@ -16,9 +16,14 @@ export const selectedWeaponAtm=atom<string|null>(null);
 
 function IndexPage():JSX.Element
 {
+  // --- atoms
   const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
 
+
+
+
+  // --- queries
   const buildsDataQy=useQuery<GroupedItemStatistics>({
     queryKey:["Tia","Bat"],
     enabled:!!(
@@ -59,16 +64,39 @@ function IndexPage():JSX.Element
     }
   });
 
-  return <>
-    <div className="top-header">
-      <BuildSelector datafiles={datafilesQy.data}/>
-    </div>
-    <div className="item-lists">
+
+
+  // --- inline components
+  /** renders placeholder for when there are no character/weapon selected */
+  function EmptyItemLists():JSX.Element
+  {
+    return <div className="no-data">
+      <h2>no character/weapon selected</h2>
+    </div>;
+  }
+
+  /** renders the 5 main item lists */
+  function ItemLists():JSX.Element
+  {
+    return <>
       <ItemList itemStats={buildsDataQy.data.weapon}/>
       <ItemList itemStats={buildsDataQy.data.head}/>
       <ItemList itemStats={buildsDataQy.data.chest}/>
       <ItemList itemStats={buildsDataQy.data.arm}/>
       <ItemList itemStats={buildsDataQy.data.leg}/>
+    </>;
+  }
+
+  // --- render
+  const characterWeaponSelected:boolean=!!(selectedCharacter && selectedWeapon);
+
+  return <>
+    <div className="top-header">
+      <BuildSelector datafiles={datafilesQy.data}/>
+    </div>
+    <div className="item-lists">
+      {!characterWeaponSelected && <EmptyItemLists/>}
+      {characterWeaponSelected && <ItemLists/>}
     </div>
   </>;
 }
