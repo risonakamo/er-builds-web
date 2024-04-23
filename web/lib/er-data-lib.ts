@@ -2,6 +2,8 @@
 
 import _ from "lodash";
 
+import {DropdownItem} from "components/dropdown1/dropdown1";
+
 /** all the sortable fields */
 export const allItemStatSortFields:ItemStatsSortField[]=[
     "builds",
@@ -34,6 +36,17 @@ export const allItemStatSortOptions: ItemStatsSortOption[]=[
         displayName: "Highest Win Rate"
     }
 ];
+
+/** dropdown item version of item sort options */
+export const itemStatSortOptionsAsDropdownItems:DropdownItem[]=_.map(
+    allItemStatSortOptions,
+    (sortOption:ItemStatsSortOption):DropdownItem=>{
+        return {
+            value:sortOption.field,
+            displayText:sortOption.displayName,
+        };
+    },
+);
 
 /** given an item statistics and a selected field to sort on, return that particular
  *  field with a displayname for the field */

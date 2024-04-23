@@ -13,6 +13,7 @@ import "./index.less";
 // --- atoms
 export const selectedCharacterAtm=atom<string|null>(null);
 export const selectedWeaponAtm=atom<string|null>(null);
+export const lastItemSortAtm=atom<string|null>(null);
 
 function IndexPage():JSX.Element
 {

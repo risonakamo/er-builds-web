@@ -2,10 +2,12 @@ import {useMemo, useState} from "react";
 import _ from "lodash";
 import {useAtom} from "jotai";
 
+import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm } from "web/pages/index-page";
+
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
-import { selectedCharacterAtm,selectedWeaponAtm } from "web/pages/index-page";
 
 import {resolveCharacterImg} from "lib/dak-lib";
+import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
 
 import "./build-selector.less";
 
@@ -20,6 +22,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
   // --- states
   const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
+  const [lastItemSort,setLastItemSort]=useAtom<string|null>(lastItemSortAtm);
 
 
 
@@ -95,6 +98,14 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
         <span>
           <Dropdown1 options={weaponOptions} currentSelection={selectedWeapon} placeholder="Weapon"
             onSelectionChange={h_selectedWeapon} disabled={weaponDropdownDisabled}/>
+        </span>
+      </div>
+
+      <div className="select-row">
+        <span className="row-title">Item Sort</span>
+        <span>
+          <Dropdown1 options={itemStatSortOptionsAsDropdownItems} currentSelection={lastItemSort}
+            placeholder="Item Sort" onSelectionChange={setLastItemSort}/>
         </span>
       </div>
     </div>
