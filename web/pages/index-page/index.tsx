@@ -2,11 +2,13 @@ import {createRoot} from "react-dom/client";
 import {useQuery,QueryClient,QueryClientProvider} from "@tanstack/react-query";
 import {atom,useAtom} from "jotai";
 import {useState} from "react";
+import {useImmer} from "use-immer";
+import _ from "lodash";
 
 import {ItemList} from "components/item-list/item-list";
 import {BuildSelector} from "components/build-selector/build-selector";
-
 import {getBuilds,getDatafiles} from "apis/er-builds-api";
+import {itemTypes_all} from "lib/er-data-lib";
 
 import "./index.less";
 
@@ -21,12 +23,25 @@ function IndexPage():JSX.Element
   const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
 
+  // dict that holds the state for each of the item sort dropdowns. each item list is associated
+  // with one of the ItemTypes, so that is the val of this dict.
+  const [
+    itemSortDropdownsStates,
+    setItemSortDropdownsStates,
+  ]=useImmer<Record<ItemType,ItemStatsSortField>>(
+    _.fromPairs(
+      _.map(itemTypes_all,(itemType:ItemType):[ItemType,ItemStatsSortField]=>{
+        return [itemType,"builds"];
+      }),
+    ) as Record<ItemType,ItemStatsSortField>,
+  );
+
 
 
 
   // --- queries
   const buildsDataQy=useQuery<GroupedItemStatistics>({
-    queryKey:["Tia","Bat"],
+    queryKey:[selectedCharacter,selectedWeapon],
     enabled:!!(
       selectedCharacter
       && selectedWeapon
@@ -77,16 +92,16 @@ function IndexPage():JSX.Element
   }
 
   /** renders the 5 main item lists */
-  function ItemLists():JSX.Element
+  function ItemLists():JSX.Element[]
   {
-    return <>
-      <ItemList itemStats={buildsDataQy.data.weapon}/>
-      <ItemList itemStats={buildsDataQy.data.head}/>
-      <ItemList itemStats={buildsDataQy.data.chest}/>
-      <ItemList itemStats={buildsDataQy.data.arm}/>
-      <ItemList itemStats={buildsDataQy.data.leg}/>
-    </>;
+    // create item list for all of the available item types
+    return _.map(itemTypes_all,(itemType:ItemType):JSX.Element=>{
+      return <ItemList itemStats={buildsDataQy.data[itemType]} key={itemType}/>;
+    });
   }
+
+
+
 
   // --- render
   const characterWeaponSelected:boolean=!!(selectedCharacter && selectedWeapon);

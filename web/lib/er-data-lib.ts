@@ -13,6 +13,15 @@ export const allItemStatSortFields:ItemStatsSortField[]=[
     "highestWinRate",
 ];
 
+/** item type enum in array form */
+export const itemTypes_all:ItemType[]=[
+    "weapon",
+    "head",
+    "chest",
+    "arm",
+    "leg",
+];
+
 /** all the sortable fields as option containers */
 export const allItemStatSortOptions: ItemStatsSortOption[]=[
     {
