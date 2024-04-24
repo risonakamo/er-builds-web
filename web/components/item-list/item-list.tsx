@@ -11,16 +11,17 @@ import "./item-list.less";
 interface ItemListProps
 {
   itemStats:ItemsStatistics[]
+
+  sortField:ItemStatsSortField
+  onSortFieldChange(newField:ItemStatsSortField):void
 }
 
 export function ItemList(props:ItemListProps):JSX.Element
 {
-  const [sortField,setSortField]=useState<ItemStatsSortField>("builds");
-
   /** sort select was changed. set the new sort field */
   function h_sortSelectChange(e:React.ChangeEvent<HTMLSelectElement>):void
   {
-    setSortField(e.target.value as ItemStatsSortField);
+    props.onSortFieldChange(e.target.value as ItemStatsSortField);
   }
 
   /** render list of item rows */
@@ -28,11 +29,11 @@ export function ItemList(props:ItemListProps):JSX.Element
   {
     return _(props.itemStats)
       .sortBy((itemstat:ItemsStatistics):number|string=>{
-        return getSortableField(itemstat,sortField).value;
+        return getSortableField(itemstat,props.sortField).value;
       })
       .reverse()
       .map((itemstat:ItemsStatistics):JSX.Element=>{
-        return <ItemRow itemStats={itemstat} sortStat={sortField} key={itemstat.itemInfo.id}/>;
+        return <ItemRow itemStats={itemstat} sortStat={props.sortField} key={itemstat.itemInfo.id}/>;
       })
       .value();
   }
@@ -55,7 +56,7 @@ export function ItemList(props:ItemListProps):JSX.Element
         </div>
       </div>
       <div className="sort-zone">
-        <select value={sortField} onChange={h_sortSelectChange}>
+        <select value={props.sortField} onChange={h_sortSelectChange}>
           {r_sortOptions()}
         </select>
       </div>

@@ -47,9 +47,9 @@ export const allItemStatSortOptions: ItemStatsSortOption[]=[
 ];
 
 /** dropdown item version of item sort options */
-export const itemStatSortOptionsAsDropdownItems:DropdownItem[]=_.map(
+export const itemStatSortOptionsAsDropdownItems:DropdownItem<ItemStatsSortField>[]=_.map(
     allItemStatSortOptions,
-    (sortOption:ItemStatsSortOption):DropdownItem=>{
+    (sortOption:ItemStatsSortOption):DropdownItem<ItemStatsSortField>=>{
         return {
             value:sortOption.field,
             displayText:sortOption.displayName,

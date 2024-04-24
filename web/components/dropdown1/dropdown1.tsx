@@ -7,34 +7,34 @@ import {clsx} from "clsx";
 
 import "./dropdown1.less";
 
-interface Dropdown1Props
+interface Dropdown1Props<T extends string = string>
 {
-  options:DropdownItem[]
+  options:DropdownItem<T>[]
   currentSelection:string|null
 
-  onSelectionChange?(newSelection:string):void
+  onSelectionChange?(newSelection:T):void
 
   placeholder:string
   disabled?:boolean
 }
 
-export interface DropdownItem
+export interface DropdownItem<T extends string = string>
 {
-  value:string
+  value:T
 
   img?:string
   displayText?:string
 }
 
-export function Dropdown1(props:Dropdown1Props):JSX.Element
+export function Dropdown1<T extends string>(props:Dropdown1Props<T>):JSX.Element
 {
   // --- states ---
   const [open,setOpen]=useState<boolean>(false);
 
 
   // --- derived ---
-  const currentSelectionObj:DropdownItem|undefined=useMemo(()=>{
-    return _.find(props.options,(option:DropdownItem):boolean=>{
+  const currentSelectionObj:DropdownItem<T>|undefined=useMemo(()=>{
+    return _.find(props.options,(option:DropdownItem<T>):boolean=>{
       return option.value==props.currentSelection;
     });
   },[props.currentSelection]);
@@ -58,7 +58,7 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
   /** render all select option items */
   function r_selectItems():JSX.Element[]
   {
-    return _.map(props.options,(selectItem:DropdownItem):JSX.Element=>{
+    return _.map(props.options,(selectItem:DropdownItem<T>):JSX.Element=>{
       /** clicked on select item. set the current selection to the item. close the dropdown */
       function h_selectItemClick():void
       {
@@ -131,13 +131,13 @@ export function Dropdown1(props:Dropdown1Props):JSX.Element
   </>;
 }
 
-interface SelectItemContainProps
+interface SelectItemContainProps<T extends string>
 {
-  option:DropdownItem
+  option:DropdownItem<T>
 }
 
 /** container for a dropdown item */
-function SelectItemContain(props:SelectItemContainProps):JSX.Element
+function SelectItemContain<T extends string>(props:SelectItemContainProps<T>):JSX.Element
 {
   return <div className="select-item-contain">
     {props.option.img &&
