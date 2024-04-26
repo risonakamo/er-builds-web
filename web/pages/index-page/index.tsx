@@ -1,7 +1,7 @@
 import {createRoot} from "react-dom/client";
 import {useQuery,QueryClient,QueryClientProvider} from "@tanstack/react-query";
 import {atom,useAtom} from "jotai";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useImmer} from "use-immer";
 import _ from "lodash";
 
@@ -41,6 +41,8 @@ function IndexPage():JSX.Element
       }),
     ) as Record<ItemType,ItemStatsSortField>,
   );
+
+  const [didUrlArgsLoad,setDidUrlArgsLoad]=useState<boolean>(false);
 
 
 
@@ -89,8 +91,14 @@ function IndexPage():JSX.Element
 
 
   // --- effects
-  /** on selected character or selected weapon changing, update the url args */
+  /** on selected character or selected weapon changing, update the url args. not enabled until did
+   *  url args load completes */
   useEffect(()=>{
+    if (!didUrlArgsLoad)
+    {
+      return;
+    }
+
     setSelectedCharacterUrlArgs({
       character:selectedCharacter || undefined,
       weapon:selectedWeapon || undefined,
@@ -111,6 +119,8 @@ function IndexPage():JSX.Element
     {
       setSelectedWeapon(urlArgs.weapon);
     }
+
+    setDidUrlArgsLoad(true);
   },[]);
 
 
