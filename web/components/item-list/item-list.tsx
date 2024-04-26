@@ -5,7 +5,6 @@ import {ItemRow} from "components/item-row/item-row";
 
 import {allItemStatSortOptions,getSortableField} from "lib/er-data-lib";
 
-import HeadItemImg from "assets/head-item.webp";
 import "./item-list.less";
 
 interface ItemListProps
@@ -14,6 +13,9 @@ interface ItemListProps
 
   sortField:ItemStatsSortField
   onSortFieldChange(newField:ItemStatsSortField):void
+
+  listIcon:string
+  listIconTooltip:string
 }
 
 export function ItemList(props:ItemListProps):JSX.Element
@@ -52,7 +54,7 @@ export function ItemList(props:ItemListProps):JSX.Element
     <div className="header">
       <div className="type-header">
         <div className="img-contain">
-          <img src={HeadItemImg}/>
+          <img src={props.listIcon} title={props.listIconTooltip}/>
         </div>
       </div>
       <div className="sort-zone">

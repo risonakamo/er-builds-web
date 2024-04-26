@@ -9,6 +9,7 @@ import {ItemList} from "components/item-list/item-list";
 import {BuildSelector} from "components/build-selector/build-selector";
 import {getBuilds,getDatafiles} from "apis/er-builds-api";
 import {itemTypes_all} from "lib/er-data-lib";
+import {ItemTypeToIcon,ItemTypeToTooltip} from "lib/item-type-lib";
 
 import "./index.less";
 
@@ -122,7 +123,8 @@ function IndexPage():JSX.Element
       }
 
       return <ItemList itemStats={buildsDataQy.data[itemType]} key={itemType}
-        sortField={itemSortDropdownsStates[itemType]} onSortFieldChange={h_sortFieldChange}/>;
+        sortField={itemSortDropdownsStates[itemType]} onSortFieldChange={h_sortFieldChange}
+        listIcon={ItemTypeToIcon[itemType]} listIconTooltip={ItemTypeToTooltip[itemType]}/>;
     });
   }
 
