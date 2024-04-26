@@ -1,7 +1,7 @@
 import {createRoot} from "react-dom/client";
 import {useQuery,QueryClient,QueryClientProvider} from "@tanstack/react-query";
-import {atom,useAtomValue} from "jotai";
-import {useState} from "react";
+import {atom,useAtom} from "jotai";
+import {useEffect, useState} from "react";
 import {useImmer} from "use-immer";
 import _ from "lodash";
 
@@ -10,6 +10,7 @@ import {BuildSelector} from "components/build-selector/build-selector";
 import {getBuilds,getDatafiles} from "apis/er-builds-api";
 import {ItemTypes_all} from "lib/item-type-lib";
 import {ItemTypeToIcon,ItemTypeToTooltip} from "lib/item-type-lib";
+import {getSelectedCharacterUrlArgs, setSelectedCharacterUrlArgs} from "lib/url-query";
 
 import "./index.less";
 
@@ -21,8 +22,8 @@ export const lastItemSortAtm=atom<ItemStatsSortField|null>(null);
 function IndexPage():JSX.Element
 {
   // --- atoms
-  const selectedCharacter=useAtomValue<string|null>(selectedCharacterAtm);
-  const selectedWeapon=useAtomValue<string|null>(selectedWeaponAtm);
+  const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
+  const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
 
 
 
@@ -84,6 +85,33 @@ function IndexPage():JSX.Element
       return data;
     }
   });
+
+
+
+  // --- effects
+  /** on selected character or selected weapon changing, update the url args */
+  useEffect(()=>{
+    setSelectedCharacterUrlArgs({
+      character:selectedCharacter || undefined,
+      weapon:selectedWeapon || undefined,
+    });
+  },[selectedCharacter,selectedWeapon]);
+
+  /** on page load, read the url args and set the character/weapon if they are set. do not set weapon
+   *  if it is set without character */
+  useEffect(()=>{
+    const urlArgs:SelectedCharacterUrlArgs=getSelectedCharacterUrlArgs();
+
+    if (urlArgs.character)
+    {
+      setSelectedCharacter(urlArgs.character);
+    }
+
+    if (urlArgs.character && urlArgs.weapon)
+    {
+      setSelectedWeapon(urlArgs.weapon);
+    }
+  },[]);
 
 
 
