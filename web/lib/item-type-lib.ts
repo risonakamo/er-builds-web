@@ -22,3 +22,12 @@ export const ItemTypeToTooltip:Record<ItemType,string>={
     "weapon":"Weapon",
     "leg":"Leg",
 };
+
+/** item type enum in array form */
+export const ItemTypes_all:ItemType[]=[
+    "weapon",
+    "head",
+    "chest",
+    "arm",
+    "leg",
+];

@@ -8,7 +8,7 @@ import _ from "lodash";
 import {ItemList} from "components/item-list/item-list";
 import {BuildSelector} from "components/build-selector/build-selector";
 import {getBuilds,getDatafiles} from "apis/er-builds-api";
-import {itemTypes_all} from "lib/er-data-lib";
+import {ItemTypes_all} from "lib/item-type-lib";
 import {ItemTypeToIcon,ItemTypeToTooltip} from "lib/item-type-lib";
 
 import "./index.less";
@@ -35,7 +35,7 @@ function IndexPage():JSX.Element
     setItemSortDropdownsStates,
   ]=useImmer<Record<ItemType,ItemStatsSortField>>(
     _.fromPairs(
-      _.map(itemTypes_all,(itemType:ItemType):[ItemType,ItemStatsSortField]=>{
+      _.map(ItemTypes_all,(itemType:ItemType):[ItemType,ItemStatsSortField]=>{
         return [itemType,"builds"];
       }),
     ) as Record<ItemType,ItemStatsSortField>,
@@ -113,7 +113,7 @@ function IndexPage():JSX.Element
   function ItemLists():JSX.Element[]
   {
     // create item list for all of the available item types
-    return _.map(itemTypes_all,(itemType:ItemType):JSX.Element=>{
+    return _.map(ItemTypes_all,(itemType:ItemType):JSX.Element=>{
       /** sort field changed. access the dropdown states dict and set the value */
       function h_sortFieldChange(newSortField:ItemStatsSortField):void
       {
