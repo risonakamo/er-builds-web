@@ -19,9 +19,19 @@ export function setSelectedCharacterUrlArgs(newArgs:SelectedCharacterUrlArgs):vo
         args.set("character",newArgs.character);
     }
 
+    else
+    {
+        args.delete("character");
+    }
+
     if (newArgs.weapon)
     {
         args.set("weapon",newArgs.weapon);
+    }
+
+    else
+    {
+        args.delete("weapon");
     }
 
     history.replaceState("","",`${location.pathname}?${args}`);

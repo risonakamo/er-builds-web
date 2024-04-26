@@ -37,7 +37,7 @@ export function Dropdown1<T extends string>(props:Dropdown1Props<T>):JSX.Element
     return _.find(props.options,(option:DropdownItem<T>):boolean=>{
       return option.value==props.currentSelection;
     });
-  },[props.currentSelection]);
+  },[props.currentSelection,props.options]);
 
 
   // --- float ui ---
