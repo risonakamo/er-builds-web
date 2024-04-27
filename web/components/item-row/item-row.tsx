@@ -40,7 +40,7 @@ export function ItemRow(props:ItemRowProps):JSX.Element
 
     return <>
       <h2>{targetSortField.fieldDisplayName}</h2>
-      <p>{targetSortField.value}</p>
+      <p>{targetSortField.displayValue}</p>
     </>;
   }
 
@@ -58,7 +58,7 @@ export function ItemRow(props:ItemRowProps):JSX.Element
 
       return <div className="detail-item" key={sortField}>
         <p className="first">{fieldValue.fieldDisplayName}</p>
-        <p>{fieldValue.value}</p>
+        <p>{fieldValue.displayValue}</p>
       </div>;
     });
   }

@@ -61,39 +61,48 @@ export function getSortableField(
         return {
             field:sortField,
             fieldDisplayName:"Builds",
-            value:itemStats.totalBuilds
+            displayValue:itemStats.totalBuilds,
+            value:itemStats.totalBuilds,
         };
 
         case "buildPercentage":
         return {
             field:sortField,
             fieldDisplayName:"Builds Percent",
-            value:`${_.round(itemStats.buildsPercentage,2)}%`
+            displayValue:`${_.round(itemStats.buildsPercentage,2)}%`,
+            value:itemStats.buildsPercentage,
         };
+
         case "likes":
         return {
             field:sortField,
             fieldDisplayName:"Likes",
-            value:itemStats.likes
+            displayValue:itemStats.likes,
+            value:itemStats.likes,
         };
+
         case "avgWinRate":
         return {
             field:sortField,
             fieldDisplayName:"Avg WR",
-            value:`${_.round(itemStats.averageWinRate,2)}%`
+            displayValue:`${_.round(itemStats.averageWinRate,2)}%`,
+            value:itemStats.averageWinRate,
         };
+
         case "highestWinRate":
         return {
             field:sortField,
             fieldDisplayName:"Highest WR",
-            value:`${_.round(itemStats.highestWinRate,2)}%`
+            displayValue:`${_.round(itemStats.highestWinRate,2)}%`,
+            value:itemStats.highestWinRate,
         };
     }
 
     return {
         field:sortField,
         fieldDisplayName:"Unknown sort field",
-        value:-1
+        value:-1,
+        displayValue:-1,
     };
 }
 
