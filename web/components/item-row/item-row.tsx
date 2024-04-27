@@ -31,6 +31,8 @@ export function ItemRow(props:ItemRowProps):JSX.Element
   const {getReferenceProps,getFloatingProps}=useInteractions([hover]);
 
 
+
+  // --- render funcs
   /** render the primary sorted state section */
   function r_sortStat():JSX.Element
   {
@@ -47,6 +49,13 @@ export function ItemRow(props:ItemRowProps):JSX.Element
   {
     return _.map(allItemStatSortFields,(sortField:ItemStatsSortField):JSX.Element=>{
       const fieldValue:ItemStatsSortableValue=getSortableField(props.itemStats,sortField);
+
+      // don't render the current sort stat as a sub detail
+      if (sortField==props.sortStat)
+      {
+        return <></>;
+      }
+
       return <div className="detail-item" key={sortField}>
         <p className="first">{fieldValue.fieldDisplayName}</p>
         <p>{fieldValue.value}</p>
@@ -54,6 +63,9 @@ export function ItemRow(props:ItemRowProps):JSX.Element
     });
   }
 
+
+
+  // --- render
   const itemContainStyles:React.CSSProperties={
     background:`url("${resolveDakUrl(props.itemStats.itemInfo.backgroundImageUrl)}")`
   };
