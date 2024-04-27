@@ -11,13 +11,10 @@ import {getBuilds,getDatafiles} from "apis/er-builds-api";
 import {ItemTypes_all} from "lib/item-type-lib";
 import {ItemTypeToIcon,ItemTypeToTooltip} from "lib/item-type-lib";
 import {getSelectedCharacterUrlArgs, setSelectedCharacterUrlArgs} from "lib/url-query";
+import {selectedCharacterAtm, selectedWeaponAtm} from "./index-atoms";
+import {filterToDatafilesOfCharacter} from "lib/er-data-lib";
 
 import "./index.less";
-
-// --- atoms
-export const selectedCharacterAtm=atom<string|null>(null);
-export const selectedWeaponAtm=atom<string|null>(null);
-export const lastItemSortAtm=atom<ItemStatsSortField|null>(null);
 
 function IndexPage():JSX.Element
 {
@@ -125,6 +122,34 @@ function IndexPage():JSX.Element
 
 
 
+  // --- state control
+  /** change selected character with various side effects also, set the weapon
+   *  to the character's first datafile's weapon, or null if there isn't one, but this should be
+   *  impossible. */
+  function changeCharacter(newChar:string):void
+  {
+    setSelectedCharacter(newChar);
+
+    const characterDataFiles:ErDataFileDescriptor[]=filterToDatafilesOfCharacter(
+      datafilesQy.data,
+      newChar,
+    );
+
+    if (characterDataFiles.length)
+    {
+      setSelectedWeapon(characterDataFiles[0].weapon);
+    }
+
+    else
+    {
+      console.error("no datafiles for character");
+      console.log(datafilesQy.data);
+      setSelectedWeapon(null);
+    }
+  }
+
+
+
   // --- handlers
   /** on changing the main item sort, set all of the fields of the other item sorts */
   function h_sharedItemSortDropdownChange(newSort:ItemStatsSortField):void
@@ -134,6 +159,12 @@ function IndexPage():JSX.Element
         return newSort;
       });
     });
+  }
+
+  /** build selector triggered character dropdown change */
+  function h_characterDropdownChange(newchar:string):void
+  {
+    changeCharacter(newchar);
   }
 
 
@@ -174,7 +205,8 @@ function IndexPage():JSX.Element
 
   return <>
     <div className="top-header">
-      <BuildSelector datafiles={datafilesQy.data} onItemSortChange={h_sharedItemSortDropdownChange}/>
+      <BuildSelector datafiles={datafilesQy.data} onItemSortChange={h_sharedItemSortDropdownChange}
+        onCharacterChange={h_characterDropdownChange}/>
     </div>
     <div className="item-lists">
       {!characterWeaponSelected && <EmptyItemLists/>}

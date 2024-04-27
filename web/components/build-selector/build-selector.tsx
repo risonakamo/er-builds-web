@@ -2,11 +2,11 @@ import {useMemo, useState} from "react";
 import _ from "lodash";
 import {useAtom} from "jotai";
 
-import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm} from "web/pages/index-page";
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
 import {resolveCharacterImg} from "lib/dak-lib";
 import {filterToDatafilesOfCharacter, itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
 import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from "lib/display-names";
+import {lastItemSortAtm, selectedCharacterAtm, selectedWeaponAtm} from "web/pages/index-page/index-atoms";
 
 import "./build-selector.less";
 
@@ -15,13 +15,14 @@ interface BuildSelectorProps
   datafiles:ErDataFileDescriptor[]
 
   onItemSortChange(newSortState:ItemStatsSortField):void
+  onCharacterChange(newChar:string):void
 }
 
 /** build selector header for builds page */
 export function BuildSelector(props:BuildSelectorProps):JSX.Element
 {
   // --- states
-  const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
+  const [selectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
   const [lastItemSort,setLastItemSort]=useAtom<ItemStatsSortField|null>(lastItemSortAtm);
 
@@ -67,31 +68,6 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
 
 
   // --- handlers
-  /** selected character with character select dropdown. set the selected character. also, set the weapon
-   *  to the character's first datafile's weapon, or null if there isn't one, but this should be
-   *  impossible. */
-  function h_selectedCharacter(newCharacter:string):void
-  {
-    setSelectedCharacter(newCharacter);
-
-    const characterDataFiles:ErDataFileDescriptor[]=filterToDatafilesOfCharacter(
-      props.datafiles,
-      newCharacter,
-    );
-
-    if (characterDataFiles.length)
-    {
-      setSelectedWeapon(characterDataFiles[0].weapon);
-    }
-
-    else
-    {
-      console.error("no datafiles for character");
-      console.log(props.datafiles);
-      setSelectedWeapon(null);
-    }
-  }
-
   /** selected new weapon with weapon select dropdown. set the new weapon */
   function h_selectedWeapon(newWeapon:string):void
   {
@@ -116,7 +92,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
         <span className="row-title">Character</span>
         <span>
           <Dropdown1 options={characterOptions} currentSelection={selectedCharacter}
-            placeholder="Character" onSelectionChange={h_selectedCharacter}/>
+            placeholder="Character" onSelectionChange={props.onCharacterChange}/>
         </span>
       </div>
 
