@@ -6,6 +6,7 @@ import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm } from "web/page
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
 import {resolveCharacterImg} from "lib/dak-lib";
 import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
+import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from "lib/display-names";
 
 import "./build-selector.less";
 
@@ -35,6 +36,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
       return {
         value:datafile.character,
         img:resolveCharacterImg(datafile.character),
+        displayText:convertCharacterNameToDisplayName(datafile.character),
       };
     })
     .uniq()
@@ -55,6 +57,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
     .map((datafile:ErDataFileDescriptor):DropdownItem=>{
       return {
         value:datafile.weapon,
+        displayText:convertWeaponNameToDisplayName(datafile.weapon),
       };
     })
     .uniq()
