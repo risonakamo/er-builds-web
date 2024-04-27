@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import _ from "lodash";
 
 import {ItemRow} from "components/item-row/item-row";
@@ -20,12 +20,27 @@ interface ItemListProps
 
 export function ItemList(props:ItemListProps):JSX.Element
 {
+  const itemList_ref=useRef<HTMLDivElement>(null);
+
+  // on sort field change, scroll to top
+  useEffect(()=>{
+    if (itemList_ref.current)
+    {
+      itemList_ref.current.scrollTop=0;
+    }
+  },[props.sortField]);
+
+
+  // --- handlers
   /** sort select was changed. set the new sort field */
   function h_sortSelectChange(e:React.ChangeEvent<HTMLSelectElement>):void
   {
     props.onSortFieldChange(e.target.value as ItemStatsSortField);
   }
 
+
+
+  // --- sub renders
   /** render list of item rows */
   function r_itemslist():JSX.Element[]
   {
@@ -50,6 +65,9 @@ export function ItemList(props:ItemListProps):JSX.Element
     });
   }
 
+
+
+  // --- main render
   return <div className="item-list">
     <div className="header">
       <div className="type-header">
@@ -63,7 +81,7 @@ export function ItemList(props:ItemListProps):JSX.Element
         </select>
       </div>
     </div>
-    <div className="list">
+    <div className="list" ref={itemList_ref}>
       {r_itemslist()}
     </div>
   </div>;
