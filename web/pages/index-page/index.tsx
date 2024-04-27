@@ -45,12 +45,18 @@ function IndexPage():JSX.Element
 
 
   // --- queries
+  /** the builds data for the current character/weapon. only loaded when character/weapon have
+   *  been selected */
   const buildsDataQy=useQuery<GroupedItemStatistics>({
     queryKey:[selectedCharacter,selectedWeapon],
     enabled:!!(
       selectedCharacter
       && selectedWeapon
     ),
+
+    refetchOnMount:false,
+    refetchOnWindowFocus:false,
+    refetchOnReconnect:false,
 
     initialData:{
       weapon:[],

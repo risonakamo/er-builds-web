@@ -83,13 +83,13 @@ export function ItemRow(props:ItemRowProps):JSX.Element
       <div className="detail">
         <div className="main-details">
           <h1>{props.itemStats.itemInfo.name}</h1>
-          <div className="sub-details">
-            {r_subDetails()}
+          <div className="sort-stat">
+            {r_sortStat()}
           </div>
         </div>
 
-        <div className="sort-stat">
-          {r_sortStat()}
+        <div className="sub-details">
+          {r_subDetails()}
         </div>
       </div>
     </div>
