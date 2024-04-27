@@ -134,6 +134,11 @@ function IndexPage():JSX.Element
    *  impossible. */
   function changeCharacter(newChar:string):void
   {
+    if (newChar==selectedCharacter)
+    {
+      return;
+    }
+
     setSelectedCharacter(newChar);
 
     const characterDataFiles:ErDataFileDescriptor[]=filterToDatafilesOfCharacter(
