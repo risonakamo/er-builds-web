@@ -4,9 +4,9 @@ import {useAtom} from "jotai";
 
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
 import {resolveCharacterImg} from "lib/dak-lib";
-import {filterToDatafilesOfCharacter, itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
+import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
 import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from "lib/display-names";
-import {lastItemSortAtm, selectedCharacterAtm, selectedWeaponAtm} from "web/pages/index-page/index-atoms";
+import {lastItemSortAtm, selectedCharacterAtm, selectedWeaponAtm} from "@/pages/index-page/index-atoms";
 
 import "./build-selector.less";
 

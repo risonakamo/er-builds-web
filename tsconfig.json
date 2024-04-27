@@ -31,7 +31,9 @@
             "apis/*":["web/apis/*"],
             "hooks/*":["web/hooks/*"],
             "store/*":["web/store/*"],
-            "assets/*":["web/assets/*"]
+            "assets/*":["web/assets/*"],
+            "pages/*":["web/pages/*"],
+            "@/*":["web/*"]
         }
     },
 
