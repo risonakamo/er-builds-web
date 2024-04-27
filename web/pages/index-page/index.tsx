@@ -175,18 +175,28 @@ function IndexPage():JSX.Element
 
 
 
-  // --- inline components
+  // --- sub renders
   /** renders placeholder for when there are no character/weapon selected */
-  function EmptyItemLists():JSX.Element
+  function r_emptyItemLists():JSX.Element
   {
+    if (characterWeaponSelected)
+    {
+      return <></>;
+    }
+
     return <div className="no-data">
       <h2>no character/weapon selected</h2>
     </div>;
   }
 
   /** renders the 5 main item lists */
-  function ItemLists():JSX.Element[]
+  function r_itemLists():JSX.Element[]
   {
+    if (!characterWeaponSelected)
+    {
+      return [];
+    }
+
     // create item list for all of the available item types
     return _.map(ItemTypes_all,(itemType:ItemType):JSX.Element=>{
       /** sort field changed. access the dropdown states dict and set the value */
@@ -215,8 +225,8 @@ function IndexPage():JSX.Element
         onCharacterChange={h_characterDropdownChange}/>
     </div>
     <div className="item-lists">
-      {!characterWeaponSelected && <EmptyItemLists/>}
-      {characterWeaponSelected && <ItemLists/>}
+      {r_emptyItemLists()}
+      {r_itemLists()}
     </div>
   </>;
 }
