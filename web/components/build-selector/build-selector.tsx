@@ -2,7 +2,8 @@ import {useMemo, useState} from "react";
 import _ from "lodash";
 import {useAtom} from "jotai";
 
-import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm } from "web/pages/index-page";
+import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm,
+  datafilesOfCurrentCharacterAtm } from "web/pages/index-page";
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
 import {resolveCharacterImg} from "lib/dak-lib";
 import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
@@ -24,6 +25,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
   const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
   const [lastItemSort,setLastItemSort]=useAtom<ItemStatsSortField|null>(lastItemSortAtm);
+  const [datafilesOfCurrentCharacter]=useAtom<ErDataFileDescriptor[]>(datafilesOfCurrentCharacterAtm);
 
 
 
@@ -67,12 +69,21 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
 
 
   // --- handlers
-  /** selected character with character select dropdown. set the selected character and clear
-   *  the weapon selection. */
+  /** selected character with character select dropdown. set the weapon to the first weapon of the
+   *  character */
   function h_selectedCharacter(newCharacter:string):void
   {
     setSelectedCharacter(newCharacter);
-    setSelectedWeapon(null);
+
+    if (datafilesOfCurrentCharacter.length)
+    {
+      setSelectedWeapon(datafilesOfCurrentCharacter[0].weapon);
+    }
+
+    else
+    {
+      setSelectedWeapon(null);
+    }
   }
 
   /** selected new weapon with weapon select dropdown. set the new weapon */

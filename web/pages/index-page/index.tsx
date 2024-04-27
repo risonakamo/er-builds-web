@@ -19,11 +19,17 @@ export const selectedCharacterAtm=atom<string|null>(null);
 export const selectedWeaponAtm=atom<string|null>(null);
 export const lastItemSortAtm=atom<ItemStatsSortField|null>(null);
 
+// based on selected character atom and the current datafiles (query).
+// filtered from the datafiles based on the currently selected character
+export const datafilesOfCurrentCharacterAtm=atom<ErDataFileDescriptor[]>([]);
+
 function IndexPage():JSX.Element
 {
   // --- atoms
   const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
+  const [datafilesOfCurrentCharacter,
+    setDatafilesOfCurrentCharacter]=useAtom<ErDataFileDescriptor[]>(datafilesOfCurrentCharacterAtm);
 
 
 
@@ -92,18 +98,25 @@ function IndexPage():JSX.Element
 
   // --- effects
   /** on selected character or selected weapon changing, update the url args. not enabled until did
-   *  url args load completes */
+   *  url args load completes. */
   useEffect(()=>{
     if (!didUrlArgsLoad)
     {
       return;
     }
 
+    // // if selected a character, and weapon is empty, select the first weapon
+    // if (selectedCharacter && !selectedWeapon && datafilesOfCurrentCharacter.length)
+    // {
+    //   setSelectedWeapon(datafilesOfCurrentCharacter[0].weapon);
+    //   return;
+    // }
+
     setSelectedCharacterUrlArgs({
       character:selectedCharacter || undefined,
       weapon:selectedWeapon || undefined,
     });
-  },[selectedCharacter,selectedWeapon]);
+  },[selectedCharacter,selectedWeapon,datafilesOfCurrentCharacter]);
 
   /** on page load, read the url args and set the character/weapon if they are set. do not set weapon
    *  if it is set without character */
@@ -123,6 +136,15 @@ function IndexPage():JSX.Element
     setDidUrlArgsLoad(true);
   },[]);
 
+  // update datafiles of current character state on datafiles or selected character change
+  useEffect(()=>{
+    setDatafilesOfCurrentCharacter(_.filter(
+      datafilesQy.data,
+      (datafile:ErDataFileDescriptor):boolean=>{
+        return selectedCharacter==datafile.character;
+      }
+    ));
+  },[selectedCharacter,datafilesQy.data])
 
 
   // --- handlers
