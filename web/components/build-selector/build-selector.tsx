@@ -2,11 +2,10 @@ import {useMemo, useState} from "react";
 import _ from "lodash";
 import {useAtom} from "jotai";
 
-import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm,
-  datafilesOfCurrentCharacterAtm } from "web/pages/index-page";
+import { selectedCharacterAtm,selectedWeaponAtm,lastItemSortAtm} from "web/pages/index-page";
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
 import {resolveCharacterImg} from "lib/dak-lib";
-import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
+import {filterToDatafilesOfCharacter, itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
 import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from "lib/display-names";
 
 import "./build-selector.less";
@@ -25,7 +24,6 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
   const [selectedCharacter,setSelectedCharacter]=useAtom<string|null>(selectedCharacterAtm);
   const [selectedWeapon,setSelectedWeapon]=useAtom<string|null>(selectedWeaponAtm);
   const [lastItemSort,setLastItemSort]=useAtom<ItemStatsSortField|null>(lastItemSortAtm);
-  const [datafilesOfCurrentCharacter]=useAtom<ErDataFileDescriptor[]>(datafilesOfCurrentCharacterAtm);
 
 
 
@@ -69,19 +67,27 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
 
 
   // --- handlers
-  /** selected character with character select dropdown. set the weapon to the first weapon of the
-   *  character */
+  /** selected character with character select dropdown. set the selected character. also, set the weapon
+   *  to the character's first datafile's weapon, or null if there isn't one, but this should be
+   *  impossible. */
   function h_selectedCharacter(newCharacter:string):void
   {
     setSelectedCharacter(newCharacter);
 
-    if (datafilesOfCurrentCharacter.length)
+    const characterDataFiles:ErDataFileDescriptor[]=filterToDatafilesOfCharacter(
+      props.datafiles,
+      newCharacter,
+    );
+
+    if (characterDataFiles.length)
     {
-      setSelectedWeapon(datafilesOfCurrentCharacter[0].weapon);
+      setSelectedWeapon(characterDataFiles[0].weapon);
     }
 
     else
     {
+      console.error("no datafiles for character");
+      console.log(props.datafiles);
       setSelectedWeapon(null);
     }
   }

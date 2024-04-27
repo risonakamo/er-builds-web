@@ -96,3 +96,17 @@ export function getSortableField(
         value:-1
     };
 }
+
+/** filter datafiles to ones with the given character */
+export function filterToDatafilesOfCharacter(
+    datafiles:ErDataFileDescriptor[],
+    character:string
+):ErDataFileDescriptor[]
+{
+    return _.filter(
+        datafiles,
+        (datafile:ErDataFileDescriptor):boolean=>{
+          return character==datafile.character;
+        }
+    );
+}
