@@ -40,7 +40,9 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
         displayText:convertCharacterNameToDisplayName(datafile.character),
       };
     })
-    .uniq()
+    .uniqBy((item:DropdownItem):string=>{
+      return item.value;
+    })
     .value();
   },[props.datafiles]);
 
@@ -61,7 +63,9 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
         displayText:convertWeaponNameToDisplayName(datafile.weapon),
       };
     })
-    .uniq()
+    .uniqBy((item:DropdownItem):string=>{
+      return item.value;
+    })
     .value();
   },[selectedCharacter,props.datafiles]);
 
