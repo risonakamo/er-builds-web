@@ -20,3 +20,15 @@ export async function getDatafiles():Promise<ErDataFileDescriptor[]>
 {
     return (await ax.get("/get-datafiles")).data;
 }
+
+/** call api to open download config */
+export async function openConfigFile():Promise<string>
+{
+    return (await ax.get("/open-downloader-config")).data;
+}
+
+/** call api to run downloader program */
+export async function runDownloader():Promise<string>
+{
+    return (await ax.get("/run-downloader")).data;
+}

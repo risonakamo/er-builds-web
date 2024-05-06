@@ -3,13 +3,14 @@ import _ from "lodash";
 import {useAtom} from "jotai";
 
 import {Dropdown1, DropdownItem} from "components/dropdown1/dropdown1";
+import {Button1} from "components/button1/button1";
 import {resolveCharacterImg} from "lib/dak-lib";
 import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
 import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from "lib/display-names";
 import {lastItemSortAtm, selectedCharacterAtm, selectedWeaponAtm} from "@/pages/index-page/index-atoms";
+import {openConfigFile, runDownloader} from "apis/er-builds-api";
 
 import "./build-selector.less";
-import {Button1} from "components/button1/button1";
 
 interface BuildSelectorProps
 {
@@ -86,6 +87,18 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
     setLastItemSort(newSort);
   }
 
+  /** clicked on button to open config file. use api func to open config file */
+  function h_clickedOpenConfig():void
+  {
+    openConfigFile();
+  }
+
+  /** clicked button to run downloader. use api func to run the downloader */
+  function h_clickedRunDownloader():void
+  {
+    runDownloader();
+  }
+
 
 
   // --- render
@@ -121,8 +134,8 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
       <div className="select-row">
         {/* <a href="">Open Downloader Config</a>
         <a href="">Run Downloader</a> */}
-        <Button1 text="Open Downloader Config"/>
-        <Button1 text="Run Downloader"/>
+        <Button1 text="Open Downloader Config" onClick={h_clickedOpenConfig}/>
+        <Button1 text="Run Downloader" onClick={h_clickedRunDownloader}/>
       </div>
     </div>
   </div>;
