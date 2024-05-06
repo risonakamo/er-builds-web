@@ -9,6 +9,7 @@ import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from 
 import {lastItemSortAtm, selectedCharacterAtm, selectedWeaponAtm} from "@/pages/index-page/index-atoms";
 
 import "./build-selector.less";
+import {Button1} from "components/button1/button1";
 
 interface BuildSelectorProps
 {
@@ -115,6 +116,13 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
             currentSelection={lastItemSort} placeholder="Item Sort"
             onSelectionChange={h_selectedItemSort}/>
         </span>
+      </div>
+
+      <div className="select-row">
+        {/* <a href="">Open Downloader Config</a>
+        <a href="">Run Downloader</a> */}
+        <Button1 text="Open Downloader Config"/>
+        <Button1 text="Run Downloader"/>
       </div>
     </div>
   </div>;

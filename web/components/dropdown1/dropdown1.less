@@ -1,21 +1,9 @@
+@import (reference) "css/boxes";
+
 .dropdown1 {
     display: inline-block;
-    border: 1px solid #afa1a1;
-    border-radius: 4px;
-    padding: 6px 20px;
-    user-select: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-family: "inter";
 
-    &.disabled {
-        pointer-events: none;
-        opacity: .5;
-    }
-
-    &:hover {
-        background: #ededed;
-    }
+    .clickable-box();
 }
 
 .select-item-contain {
