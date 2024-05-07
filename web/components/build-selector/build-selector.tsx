@@ -1,4 +1,4 @@
-import {useMemo, useState} from "react";
+import {useMemo, useRef, useState} from "react";
 import _ from "lodash";
 import {useAtom} from "jotai";
 
@@ -74,6 +74,9 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
 
 
   // --- handlers
+  const openConfigFileThrottled=useRef(_.throttle(openConfigFile,1500));
+  const runDownloadThrottled=useRef(_.throttle(runDownloader,4500));
+
   /** selected new weapon with weapon select dropdown. set the new weapon */
   function h_selectedWeapon(newWeapon:string):void
   {
@@ -90,13 +93,13 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
   /** clicked on button to open config file. use api func to open config file */
   function h_clickedOpenConfig():void
   {
-    openConfigFile();
+    openConfigFileThrottled.current();
   }
 
   /** clicked button to run downloader. use api func to run the downloader */
   function h_clickedRunDownloader():void
   {
-    runDownloader();
+    runDownloadThrottled.current();
   }
 
 
