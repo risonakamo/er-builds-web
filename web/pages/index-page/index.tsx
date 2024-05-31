@@ -64,6 +64,8 @@ function IndexPage():JSX.Element
       chest:[],
       arm:[],
       leg:[],
+      tacskill:[],
+      augment:[],
     },
 
     async queryFn():Promise<GroupedItemStatistics>

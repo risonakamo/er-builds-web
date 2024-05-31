@@ -13,6 +13,8 @@ export const ItemTypeToIcon:Record<ItemType,string>={
     "chest":chestItemIcon,
     "weapon":weaponItemIcon,
     "leg":legItemIcon,
+    "tacskill":legItemIcon,
+    "augment":legItemIcon,
 };
 
 export const ItemTypeToTooltip:Record<ItemType,string>={
@@ -21,6 +23,8 @@ export const ItemTypeToTooltip:Record<ItemType,string>={
     "chest":"Chest",
     "weapon":"Weapon",
     "leg":"Leg",
+    "tacskill":"Tactical Skill",
+    "augment":"Augment",
 };
 
 /** item type enum in array form */
@@ -30,4 +34,6 @@ export const ItemTypes_all:ItemType[]=[
     "head",
     "arm",
     "leg",
+    "tacskill",
+    "augment",
 ];
