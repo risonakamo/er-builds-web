@@ -196,7 +196,7 @@ function IndexPage():JSX.Element
     </div>;
   }
 
-  /** renders the 5 main item lists */
+  /** renders the item lists */
   function r_itemLists():JSX.Element[]
   {
     if (!characterWeaponSelected)
@@ -206,6 +206,12 @@ function IndexPage():JSX.Element
 
     // create item list for all of the available item types
     return _.map(ItemTypes_all,(itemType:ItemType):JSX.Element=>{
+      // if there is no data for the particular item list, don't render the item list
+      if (!buildsDataQy.data[itemType] || !buildsDataQy.data[itemType].length)
+      {
+        return <></>;
+      }
+
       /** sort field changed. access the dropdown states dict and set the value */
       function h_sortFieldChange(newSortField:ItemStatsSortField):void
       {
