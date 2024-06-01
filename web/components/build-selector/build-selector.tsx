@@ -8,7 +8,7 @@ import {resolveCharacterImg} from "lib/dak-lib";
 import {itemStatSortOptionsAsDropdownItems} from "lib/er-data-lib";
 import {convertCharacterNameToDisplayName, convertWeaponNameToDisplayName} from "lib/display-names";
 import {lastItemSortAtm, selectedCharacterAtm, selectedWeaponAtm} from "@/pages/index-page/index-atoms";
-import {openConfigFile, runDownloader} from "apis/er-builds-api";
+import {openConfigFile, runDownloader, runNicaDownloader} from "apis/er-builds-api";
 
 import "./build-selector.less";
 
@@ -76,6 +76,7 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
   // --- handlers
   const openConfigFileThrottled=useRef(_.throttle(openConfigFile,1500));
   const runDownloadThrottled=useRef(_.throttle(runDownloader,4500));
+  const runNicaDownloadThrottled=useRef(_.throttle(runNicaDownloader,4500));
 
   /** selected new weapon with weapon select dropdown. set the new weapon */
   function h_selectedWeapon(newWeapon:string):void
@@ -100,6 +101,12 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
   function h_clickedRunDownloader():void
   {
     runDownloadThrottled.current();
+  }
+
+  /** clicked button to run nica downloader. use api func to run the downloader */
+  function h_clickedNicaDownloader():void
+  {
+    runNicaDownloadThrottled.current();
   }
 
 
@@ -135,10 +142,9 @@ export function BuildSelector(props:BuildSelectorProps):JSX.Element
       </div>
 
       <div className="select-row">
-        {/* <a href="">Open Downloader Config</a>
-        <a href="">Run Downloader</a> */}
         <Button1 text="Open Downloader Config" onClick={h_clickedOpenConfig}/>
         <Button1 text="Run Downloader" onClick={h_clickedRunDownloader}/>
+        <Button1 text="Run Nica Downloader" onClick={h_clickedNicaDownloader}/>
       </div>
     </div>
   </div>;

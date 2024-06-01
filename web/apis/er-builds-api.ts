@@ -32,3 +32,9 @@ export async function runDownloader():Promise<string>
 {
     return (await ax.get("/run-downloader")).data;
 }
+
+/** call api to run nica downloader program */
+export async function runNicaDownloader():Promise<string>
+{
+    return (await ax.get("/run-nica-downloader")).data;
+}
