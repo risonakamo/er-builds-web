@@ -17,6 +17,7 @@ type ItemStatsSortField =
     | "likes"
     | "avgWinRate"
     | "highestWinRate"
+    | "buildLikeRatio"
 
 /** dak gg character name enums */
 type CharacterName =
@@ -52,6 +53,8 @@ interface ItemsStatistics
     buildsPercentage: number
 
     likes: number
+
+    buildLikeRatio: number
 
     totalWinRate: number
     averageWinRate: number

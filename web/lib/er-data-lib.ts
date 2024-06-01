@@ -34,6 +34,10 @@ export const allItemStatSortOptions: ItemStatsSortOption[]=[
     {
         field: "highestWinRate",
         displayName: "Highest Win Rate"
+    },
+    {
+        field:"buildLikeRatio",
+        displayName:"Build-Like Ratio",
     }
 ];
 
@@ -95,6 +99,14 @@ export function getSortableField(
             fieldDisplayName:"Highest WR",
             displayValue:`${_.round(itemStats.highestWinRate,2)}%`,
             value:itemStats.highestWinRate,
+        };
+
+        case "buildLikeRatio":
+        return {
+            field:sortField,
+            fieldDisplayName:"Build-Like Ratio",
+            displayValue:`${_.round(itemStats.buildLikeRatio,2)}`,
+            value:itemStats.buildLikeRatio
         };
     }
 

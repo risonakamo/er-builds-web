@@ -15,7 +15,8 @@ export const itemStatsExample1:ItemsStatistics[]=[
         likes: 32,
         totalWinRate: 203.91000366210938,
         averageWinRate: 4.742093086242676,
-        highestWinRate: 66.66999816894531
+        highestWinRate: 66.66999816894531,
+        buildLikeRatio:1
     },
     {
         itemInfo: {
@@ -31,7 +32,8 @@ export const itemStatsExample1:ItemsStatistics[]=[
         likes: 21,
         totalWinRate: 225.4199981689453,
         averageWinRate: 5.635499954223633,
-        highestWinRate: 55.560001373291016
+        highestWinRate: 55.560001373291016,
+        buildLikeRatio:1
     }
 ];
 
@@ -50,7 +52,8 @@ export const itemStatsExample2:ItemsStatistics[]=[
         likes: 0,
         totalWinRate: 0,
         averageWinRate: 0,
-        highestWinRate: 50
+        highestWinRate: 50,
+        buildLikeRatio:1
     },
     {
         itemInfo: {
@@ -66,7 +69,8 @@ export const itemStatsExample2:ItemsStatistics[]=[
         likes: 0,
         totalWinRate: 0,
         averageWinRate: 0,
-        highestWinRate: 0
+        highestWinRate: 0,
+        buildLikeRatio:1
     },
     {
         itemInfo: {
@@ -82,6 +86,7 @@ export const itemStatsExample2:ItemsStatistics[]=[
         likes: 0,
         totalWinRate: 406.2900390625,
         averageWinRate: 6.771500587463379,
-        highestWinRate: 55.560001373291016
+        highestWinRate: 55.560001373291016,
+        buildLikeRatio:1
     }
 ];
