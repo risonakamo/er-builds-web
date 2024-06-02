@@ -28,16 +28,16 @@ export const allItemStatSortOptions: ItemStatsSortOption[]=[
         displayName: "Likes"
     },
     {
+        field:"buildLikeRatio",
+        displayName:"Build-Like Ratio",
+    },
+    {
         field: "avgWinRate",
         displayName: "Average Win Rate"
     },
     {
         field: "highestWinRate",
         displayName: "Highest Win Rate"
-    },
-    {
-        field:"buildLikeRatio",
-        displayName:"Build-Like Ratio",
     }
 ];
 
