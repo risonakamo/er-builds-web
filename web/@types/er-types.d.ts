@@ -9,6 +9,7 @@ type ItemType =
     | "leg"
     | "tacskill"
     | "augment"
+    | "late"
 
 /** possible fields ItemStats can be sorted by */
 type ItemStatsSortField =

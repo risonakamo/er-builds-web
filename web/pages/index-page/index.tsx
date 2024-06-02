@@ -66,6 +66,7 @@ function IndexPage():JSX.Element
       leg:[],
       tacskill:[],
       augment:[],
+      late:[],
     },
 
     async queryFn():Promise<GroupedItemStatistics>
