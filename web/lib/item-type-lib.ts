@@ -7,6 +7,7 @@ import weaponItemIcon from "assets/weapon-item.webp";
 import legItemIcon from "assets/leg-item.webp";
 import augmentItemIcon from "assets/augment-item.png";
 import tacItemIcon from "assets/tacskill-item.png";
+import lateItemIcon from "assets/late-item.png";
 
 /** convert itemtype enum to its corresponding icon */
 export const ItemTypeToIcon:Record<ItemType,string>={
@@ -17,7 +18,7 @@ export const ItemTypeToIcon:Record<ItemType,string>={
     "leg":legItemIcon,
     "tacskill":tacItemIcon,
     "augment":augmentItemIcon,
-    "late":legItemIcon,
+    "late":lateItemIcon,
 };
 
 export const ItemTypeToTooltip:Record<ItemType,string>={
